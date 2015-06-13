@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        style="@style/episode_details_screenshot"
+        android:id="@+id/episode_details_screenshot"
+        android:src="@drawable/highlight_placeholder"/>
+    <!--Eu posso colocar dp = px (designer trabalhou com medida que garante que 1px = 1dp -->
+
+    <ImageView
+        style="@style/episode_details_screenshot"
+        android:src="@drawable/overlay"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/episode_details_screenshot_bottom_text"
+        android:textColor="@color/default_background_second"
+        android:textSize="@dimen/default_textSize_veryLarge"
+        android:layout_alignBottom="@id/episode_details_screenshot"
+        android:layout_marginBottom="@dimen/default_spacing_large"
+        android:layout_marginLeft="@dimen/default_spacing_large"/>
+
+</RelativeLayout>
