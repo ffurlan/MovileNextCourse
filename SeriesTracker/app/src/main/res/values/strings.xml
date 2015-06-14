@@ -7,4 +7,7 @@
     <string name="base_navigation_drawer_close">Close</string>
     <string name="episode_details_screenshot_bottom_text">The walking dead - Season 2</string>
     <string name="episode_details_screenshot_upper_text">Episode 4</string>
+    <string name="episode_details_cardViewTime_text">2015-04-22 at 21:30</string>
+    <string name="episode_details_cardViewSummary_Title">Summary</string>
+    <string name="episode_details_cardViewSummary_Description">"Arya arrives in Braavos. Jamie takes on a secret mission. Ellaria Sand seeks revenge for Oberyn's death. Stannis makes Jon a generous offer as the Night's Watch elects a new Lord Commander. Daenerys is faced with a difficult decision. Arya arrives in Braavos. Jamie takes on a secret mission. Ellaria Sand seeks revenge for Oberyn's death. Stannis makes Jon a generous offer as the Night's Watch elects a new Lord Commander. Daenerys is faced with a difficult decision."</string>
 </resources>

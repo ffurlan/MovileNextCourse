@@ -11,10 +11,24 @@
         <item name="android:windowBackground">@color/theme_windowBackground</item>
     </style>
 
-    <style name="episode_details_screenshot" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme.EpisodeDetails"></style>
+
+    <style name="AppTheme.EpisodeDetails.Screenshot" parent="Theme.AppCompat.NoActionBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/episode_details_screenshot_height</item>
+        <item name="android:maxLines">2</item> --Ele deixará a string com somente 2 linhas.
+        <item name="android:ellipsize">end</item> --Ele irá incluir "..." no final da string (caso passe de 2 linhas).
         <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="AppTheme.EpisodeDetails.Screenshot.Title" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/default_background_second</item>
+        <item name="android:textSize">@dimen/default_textSize_veryLarge</item>
+        <item name="android:layout_marginBottom">@dimen/default_spacing_large</item>
+        <item name="android:layout_marginLeft">@dimen/default_spacing_large</item>
+
     </style>
 
 </resources>
