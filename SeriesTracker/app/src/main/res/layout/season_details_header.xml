@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        style="@style/AppTheme.EpisodeDetails.Screenshot"
+        android:id="@+id/episode_details_screenshot"
+        android:src="@drawable/highlight_placeholder"/>
+
+    <ImageView
+        style="@style/AppTheme.EpisodeDetails.Screenshot"
+        android:src="@drawable/overlay"/>
+
+
+    <TextView
+        android:id="@+id/episode_details_screenshot_Title"
+        style="@style/AppTheme.EpisodeDetails.Screenshot.Title"
+        android:layout_alignBottom="@id/episode_details_screenshot"
+        android:text="@string/episode_details_screenshot_bottom_text" />
+
+</RelativeLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/season_details_episodeNumber"
+        style="@style/AppTheme.SeasonDetails.Item.EpisodeNumber"
+        android:text="E01" />
+
+    <TextView
+        android:id="@+id/season_details_episodeTitle"
+        style="@style/AppTheme.SeasonDetails.Item.EpisodeTitle"
+        android:text="The wars to come"
+        />
+
+</LinearLayout>
