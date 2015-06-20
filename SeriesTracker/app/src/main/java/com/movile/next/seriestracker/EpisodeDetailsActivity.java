@@ -7,58 +7,64 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.MessageFormat;
+import com.bumptech.glide.Glide;
 
-import async.RemoteImageAsyncTask;
-import callbacks.operationLoaderCallback;
 import listener.OnEpisodeImageListener;
 import listener.OnEpisodeListener;
 import model.Episode;
+import model.Images;
+import presenter.EpisodeDetailsPresenter;
+import remote.server.EpisodeRemoteCaller;
+import remote.callbacks.EpisodeDetailsCallback;
 import util.FormatUtil;
+import view.EpisodeDetailsView;
 
 
-public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpisodeListener, OnEpisodeImageListener {
+public class EpisodeDetailsActivity extends ActionBarActivity implements EpisodeDetailsView {
+
+
+    private static EpisodeDetailsPresenter episodeDetailsPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.episode_details_activity);
 
-        //Chama a Task Assíncrona
+        //region MVP
+        if (episodeDetailsPresenter == null)
+            episodeDetailsPresenter = new EpisodeDetailsPresenter(this, getString(R.string.api_url_base));
+
+        episodeDetailsPresenter.getEpisodeDetails("house", 2, 8);
+
+
+        //endregion
+
+        //region Com Task Assíncrona
         //GetEpisodeDetailsInfoAsync task = new GetEpisodeDetailsInfoAsync(this, this.getApplicationContext());
-        //task.execute();
+        //task.execute();]
+        //endregion
 
-        String url = getString(R.string.api_url_base) + getString(R.string.api_url_episode);
-        url = MessageFormat.format(url, "the-walking-dead", 1, 1);
-        getLoaderManager().initLoader(
-                0, null, new operationLoaderCallback(this, this, url)
-        ).forceLoad();
+        //region Com Loader
 
-        //RemoteImageAsyncTask task = new RemoteImageAsyncTask();
-        //task.execute();
+        //String url = getString(R.string.api_url_base) + getString(R.string.api_url_episode);
+        //url = MessageFormat.format(url, "person-of-interest", 1, 2);
+        //getLoaderManager().initLoader(
+        //        0, null, new operationLoaderCallback(this, this, url)
+        //).forceLoad();
+        //endregion
+
+        //region Com API
+        //EpisodeRemoteCaller erc = new EpisodeRemoteCaller(this, getString(R.string.api_url_base));
+        //erc.getEpisodeDetails("house", 6, 8);
+        //endregion
+
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        TextView txtView = (TextView) findViewById(R.id.episode_details_screenshot_Title);
-        txtView.setText(savedInstanceState.getString("detailTitle"));
-        Log.d(EpisodeDetailsActivity.class.getName(), "onRestoreInstanceState");
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        //final TextView text = (TextView)findViewById(R.id.episode_details_screenshot_Title);
-        //String videoTitle = text.toString();
-        outState.putString("detailTitle", "The Following - Season 2 - Episode 4");
-        super.onSaveInstanceState(outState, outPersistentState);
-        Log.d(EpisodeDetailsActivity.class.getName(), "onSaveInstanceState");
-     }
-
-    @Override
-    public void onEpisodeLoaded(Episode episode) {
+    public void displayEpisode(Episode episode) {
         TextView txtScreenshotTitle = (TextView) findViewById(R.id.episode_details_screenshot_Title);
         txtScreenshotTitle.setText(episode.title());
 
@@ -68,7 +74,72 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpiso
 
         TextView txtSummaryDescription = (TextView) findViewById(R.id.episode_summary_Description);
         txtSummaryDescription.setText(episode.overview());
+
+        //RemoteImageAsyncTask task = new RemoteImageAsyncTask(this);
+        //task.execute(episode.images().screenshot().get(Images.ImageSize.THUMB));
+
+        ImageView img = (ImageView) findViewById(R.id.episode_details_screenshot);
+        String url = episode.images().screenshot().get(Images.ImageSize.THUMB);
+        Glide.with(this)
+                .load(url)
+                .placeholder(R.drawable.overlay)
+                .centerCrop()
+                .into(img);
     }
+
+    //region Callbacks
+
+     //public void onEpisodeLoaded(Episode episode) {
+    //    TextView txtScreenshotTitle = (TextView) findViewById(R.id.episode_details_screenshot_Title);
+    //    txtScreenshotTitle.setText(episode.title());
+
+     //   TextView txtClockTitle = (TextView) findViewById(R.id.episode_details_clock_Title);
+     //   FormatUtil fd = new FormatUtil();
+      //  txtClockTitle.setText(fd.formatDate(fd.formatDate(episode.firstAired())));
+//
+      //  TextView txtSummaryDescription = (TextView) findViewById(R.id.episode_summary_Description);
+      //  txtSummaryDescription.setText(episode.overview());
+
+        //RemoteImageAsyncTask task = new RemoteImageAsyncTask(this);
+        //task.execute(episode.images().screenshot().get(Images.ImageSize.THUMB));
+
+      //  ImageView img = (ImageView) findViewById(R.id.episode_details_screenshot);
+      //  String url = episode.images().screenshot().get(Images.ImageSize.THUMB);
+      //  Glide.with(this)
+       //         .load(url)
+       //         .placeholder(R.drawable.overlay)
+      //          .centerCrop()
+      //          .into(img);
+
+    //}
+
+    //public void onLoadImage(Bitmap bitmap) {
+        //ImageView img = (ImageView) findViewById(R.id.episode_details_screenshot);
+        //img.setImageBitmap(bitmap);
+    //}
+    //endregion
+
+    //region Save Instance X Restore Instance
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        //final TextView text = (TextView)findViewById(R.id.episode_details_screenshot_Title);
+        //String videoTitle = text.toString();
+        outState.putString("detailTitle", "The Following - Season 2 - Episode 4");
+        super.onSaveInstanceState(outState, outPersistentState);
+        Log.d(EpisodeDetailsActivity.class.getName(), "onSaveInstanceState");
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        TextView txtView = (TextView) findViewById(R.id.episode_details_screenshot_Title);
+        txtView.setText(savedInstanceState.getString("detailTitle"));
+        Log.d(EpisodeDetailsActivity.class.getName(), "onRestoreInstanceState");
+    }
+    //endregion
+
+    //region Ciclo de Vida
 
     @Override
     protected void onResume() {
@@ -105,6 +176,7 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpiso
         Log.d(EpisodeDetailsActivity.class.getName(), "onDestroy");
         super.onDestroy();
     }
+    //endregion
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,10 +198,5 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpiso
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onLoadImage(Bitmap bitmap) {
-
     }
 }

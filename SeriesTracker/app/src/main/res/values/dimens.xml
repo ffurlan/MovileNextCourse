@@ -10,5 +10,7 @@
     <dimen name="default_textSize_medium">16sp</dimen>
     <dimen name="default_textSize_large">18sp</dimen>
     <dimen name="default_textSize_veryLarge">24sp</dimen>
-     <dimen name="episode_details_screenshot_height">248dp</dimen>
+    <dimen name="episode_details_screenshot_height">248dp</dimen>
+    <dimen name="list_view_divider_height">2dp</dimen>
+
 </resources>

@@ -48,7 +48,7 @@ public class FetchRemoteEpisodeDetails {
         connection.setRequestMethod("GET");
         connection.setDoInput(true);
         connection.setRequestProperty("Content-Type", "application/json");
-        connection.setRequestProperty("trakt-api-version", context.getResources().getString(R.string.api_version));
+            connection.setRequestProperty("trakt-api-version", context.getResources().getString(R.string.api_version));
         connection.setRequestProperty("trakt-api-key", context.getResources().getString(R.string.api_key));
 
         return connection;

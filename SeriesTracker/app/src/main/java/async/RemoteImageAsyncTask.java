@@ -2,6 +2,7 @@ package async;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -13,6 +14,7 @@ import listener.OnEpisodeImageListener;
 public class RemoteImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
 
     private OnEpisodeImageListener mListener;
+
 
     public RemoteImageAsyncTask(OnEpisodeImageListener listener)
     {

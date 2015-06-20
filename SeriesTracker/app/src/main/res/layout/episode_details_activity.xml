@@ -80,7 +80,7 @@
 
 
             <TextView
-                android:layout_height="14dp"
+                android:layout_height="24dp"
                 android:layout_width="match_parent"
                 android:text="@string/episode_details_cardViewSummary_Title"
                 android:textColor="@color/default_textColor_third"
