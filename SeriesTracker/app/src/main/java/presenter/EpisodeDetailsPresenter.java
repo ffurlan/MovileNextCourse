@@ -2,7 +2,7 @@ package presenter;
 
 import model.Episode;
 import remote.callbacks.EpisodeDetailsCallback;
-import remote.server.EpisodeRemoteCaller;
+import remote.client.EpisodeRemoteCaller;
 import view.EpisodeDetailsView;
 
 /**

@@ -1,43 +1,47 @@
 package com.movile.next.seriestracker;
 
-import android.graphics.Bitmap;
-import android.os.PersistableBundle;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.movile.next.seriestracker.base.BaseNavigationToolbarActivity;
 
-import listener.OnEpisodeImageListener;
-import listener.OnEpisodeListener;
+import java.text.MessageFormat;
+
 import model.Episode;
 import model.Images;
 import presenter.EpisodeDetailsPresenter;
-import remote.server.EpisodeRemoteCaller;
-import remote.callbacks.EpisodeDetailsCallback;
 import util.FormatUtil;
 import view.EpisodeDetailsView;
 
 
-public class EpisodeDetailsActivity extends ActionBarActivity implements EpisodeDetailsView {
+public class EpisodeDetailsActivity extends BaseNavigationToolbarActivity implements EpisodeDetailsView {
 
 
     private static EpisodeDetailsPresenter episodeDetailsPresenter;
 
-    @Override
+    public static String EXTRA_EPISODENUMBER = "EPISODE_NUMBER";
+
+    private static int mEpisodeNumber = 1;
+
+
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.episode_details_activity);
+        //showLoading();
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.episode_details_activity);
+         configureToolbar();
+         showLoading();
+
 
         //region MVP
-        if (episodeDetailsPresenter == null)
-            episodeDetailsPresenter = new EpisodeDetailsPresenter(this, getString(R.string.api_url_base));
+        episodeDetailsPresenter = new EpisodeDetailsPresenter(this, getString(R.string.api_url_base));
 
-        episodeDetailsPresenter.getEpisodeDetails("house", 2, 8);
+         GetExtrasFromBundle();
+
+        episodeDetailsPresenter.getEpisodeDetails("house", 2, mEpisodeNumber);
 
 
         //endregion
@@ -63,8 +67,17 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements Episode
 
     }
 
+    public void GetExtrasFromBundle()
+    {
+        Intent intent = getIntent();
+        mEpisodeNumber = (int)intent.getExtras().getLong(EXTRA_EPISODENUMBER);
+    }
+
     @Override
     public void displayEpisode(Episode episode) {
+
+        getSupportActionBar().setTitle(MessageFormat.format("S{0} - Episode {1}", episode.season(), episode.number()));
+
         TextView txtScreenshotTitle = (TextView) findViewById(R.id.episode_details_screenshot_Title);
         txtScreenshotTitle.setText(episode.title());
 
@@ -80,11 +93,12 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements Episode
 
         ImageView img = (ImageView) findViewById(R.id.episode_details_screenshot);
         String url = episode.images().screenshot().get(Images.ImageSize.THUMB);
-        Glide.with(this)
+        Glide.with(getApplicationContext())
                 .load(url)
                 .placeholder(R.drawable.overlay)
                 .centerCrop()
                 .into(img);
+        hideLoading();
     }
 
     //region Callbacks
@@ -120,83 +134,84 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements Episode
     //endregion
 
     //region Save Instance X Restore Instance
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+    //Override
+    //public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         //final TextView text = (TextView)findViewById(R.id.episode_details_screenshot_Title);
         //String videoTitle = text.toString();
-        outState.putString("detailTitle", "The Following - Season 2 - Episode 4");
-        super.onSaveInstanceState(outState, outPersistentState);
-        Log.d(EpisodeDetailsActivity.class.getName(), "onSaveInstanceState");
-    }
+       // outState.putString("detailTitle", "The Following - Season 2 - Episode 4");
+        //super.onSaveInstanceState(outState, outPersistentState);
+        //Log.d(EpisodeDetailsActivity.class.getName(), "onSaveInstanceState");
+    //}
 
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        TextView txtView = (TextView) findViewById(R.id.episode_details_screenshot_Title);
-        txtView.setText(savedInstanceState.getString("detailTitle"));
-        Log.d(EpisodeDetailsActivity.class.getName(), "onRestoreInstanceState");
-    }
+    //Override
+   // protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        //super.onRestoreInstanceState(savedInstanceState);
+        //TextView txtView = (TextView) findViewById(R.id.episode_details_screenshot_Title);
+       // txtView.setText(savedInstanceState.getString("detailTitle"));
+        //Log.d(EpisodeDetailsActivity.class.getName(), "onRestoreInstanceState");
+    //}
     //endregion
 
     //region Ciclo de Vida
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(EpisodeDetailsActivity.class.getName(), "onResume");
-    }
+    //Override
+    //protected void onResume() {
+    //    super.onResume();
+        //Log.d(EpisodeDetailsActivity.class.getName(), "onResume");
+    //}
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(EpisodeDetailsActivity.class.getName(), "onStart");
-    }
+    //Override
+    //protected void onStart() {
+    //    super.onStart();
+        //Log.d(EpisodeDetailsActivity.class.getName(), "onStart");
+    //}
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(EpisodeDetailsActivity.class.getName(), "onPause");
-    }
+    //Override
+    //protected void onPause() {
+      //  super.onPause();
+        //Log.d(EpisodeDetailsActivity.class.getName(), "onPause");
+    //}
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(EpisodeDetailsActivity.class.getName(), "onStop");
-    }
+    //Override
+    //protected void onStop() {
+    //    super.onStop();
+        //Log.d(EpisodeDetailsActivity.class.getName(), "onStop");
+   // }
 
-    @Override
-    protected void onRestart() {
-        Log.d(EpisodeDetailsActivity.class.getName(), "onRestart");
-        super.onRestart();
-    }
+    //Override
+    //protected void onRestart() {
+        //Log.d(EpisodeDetailsActivity.class.getName(), "onRestart");
+    //    super.onRestart();
+    //}
 
-    @Override
-    protected void onDestroy() {
-        Log.d(EpisodeDetailsActivity.class.getName(), "onDestroy");
-        super.onDestroy();
-    }
+    //Override
+    //protected void onDestroy() {
+
+        //Log.d(EpisodeDetailsActivity.class.getName(), "onDestroy");
+      //  super.onDestroy();
+    //}
     //endregion
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    //Override
+    //public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.episode_details_menu, menu);
-        return true;
-    }
+        //getMenuInflater().inflate(R.menu.episode_details_menu, menu);
+        //return true;
+    //}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    //Override
+    //public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
 
-        return super.onOptionsItemSelected(item);
-    }
+        //return super.onOptionsItemSelected(item);
+    //}
 }

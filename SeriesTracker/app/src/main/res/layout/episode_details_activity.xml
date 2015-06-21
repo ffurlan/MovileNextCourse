@@ -27,8 +27,8 @@
     <TextView
         android:id="@+id/episode_details_screenshot_Title"
         style="@style/AppTheme.EpisodeDetails.Screenshot.Title"
-        android:layout_alignBottom="@id/episode_details_screenshot"
-        android:text="@string/episode_details_screenshot_bottom_text" />
+        android:layout_alignBottom="@id/episode_details_screenshot" >
+    </TextView>
 
 </RelativeLayout>
 
@@ -57,7 +57,6 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:textColor="@color/default_textColor_second"
-            android:text="@string/episode_details_cardViewTime_text"
             android:textSize="@dimen/default_textSize_medium"
             android:layout_marginLeft="64dp"
             android:layout_marginTop="23dp"
@@ -101,7 +100,6 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textColor="@color/default_textColor_fourth"
-                android:text="@string/episode_details_cardViewSummary_Description"
                 android:textSize="@dimen/default_textSize_medium"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"

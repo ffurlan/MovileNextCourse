@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <ImageView
-        style="@style/AppTheme.EpisodeDetails.Screenshot"
-        android:id="@+id/episode_details_screenshot"
-        android:src="@drawable/highlight_placeholder"/>
+        android:id="@+id/image_seasonTitle"
+        android:layout_width="match_parent"
+        android:layout_height="248dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/highlight_placeholder" />
 
     <ImageView
-        style="@style/AppTheme.EpisodeDetails.Screenshot"
-        android:src="@drawable/overlay"/>
-
+        android:id="@+id/image_seasonBottom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/overlay"
+        android:layout_below="@+id/image_seasonTitle" />
 
     <TextView
-        android:id="@+id/episode_details_screenshot_Title"
-        style="@style/AppTheme.EpisodeDetails.Screenshot.Title"
-        android:layout_alignBottom="@id/episode_details_screenshot"
-        android:text="@string/episode_details_screenshot_bottom_text" />
+        android:id="@+id/text_seasonEpisode"
+        android:text="Episodes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignBottom="@+id/image_seasonBottom"/>
+
+    <ImageView
+        android:id="@+id/image_season"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/season_item_placeholder"
+        android:layout_alignBottom="@+id/text_seasonEpisode"/>
+
+    <TextView
+        android:id="@+id/text_seasonRating"
+        android:text="8.5"
+        android:textColor="@color/theme_textColorPrimary"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="center"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/rating"
+        android:layout_alignBottom="@+id/image_season"/>
 
 </RelativeLayout>

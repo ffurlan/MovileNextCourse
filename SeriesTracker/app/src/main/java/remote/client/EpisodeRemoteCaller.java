@@ -1,4 +1,4 @@
-package remote.server;
+package remote.client;
 
 import model.Episode;
 import retrofit.Callback;
