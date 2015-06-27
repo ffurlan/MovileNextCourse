@@ -34,6 +34,11 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
     private static EpisodeListAdapter mAdapter;
     private static View mHeaderView;
 
+    public static String EXTRA_SEASONNUMBER = "SEASON_NUMBER";
+    private static int mSeasonNumber = 1;
+    public static String EXTRA_SHOWNAME = "SHOW_NAME";
+    private static String mShowName = "house";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //
@@ -41,6 +46,9 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
         setContentView(R.layout.season_details_activity);
         showLoading();
         configureToolbar();
+
+        GetExtrasFromBundle();
+
 
         ListView view = (ListView) findViewById(R.id.list_view);
         mHeaderView = getLayoutInflater().inflate(R.layout.season_details_header, null);
@@ -51,13 +59,13 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
 
         //region MVP
         seasonDetailsPresenter = new SeasonDetailsPresenter(this, getString(R.string.api_url_base));
-        seasonDetailsPresenter.getSeasonEpisodeList("house", 2);
+        seasonDetailsPresenter.getSeasonEpisodeList(mShowName, mSeasonNumber);
 
         seasonDetailsHeaderPresenter = new SeasonDetailsHeaderPresenter(this, getString(R.string.api_url_base));
-        seasonDetailsHeaderPresenter.getSeasonDetails("house", 2);
+        seasonDetailsHeaderPresenter.getSeasonDetails(mShowName, mSeasonNumber);
 
 
-        getSupportActionBar().setTitle(MessageFormat.format("Season{0}", "2"));
+        getSupportActionBar().setTitle(MessageFormat.format("Season{0}", mSeasonNumber));
     }
 
     @Override
@@ -66,11 +74,17 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
     }
 
     @Override
+    public void displaySeasonInfo(List<Season> seasons) {
+
+    }
+
+    @Override
     public void onEpisodeClick(Episode episode) {
         Intent intent = new Intent(this, EpisodeDetailsActivity.class);
         intent.putExtra(EpisodeDetailsActivity.EXTRA_EPISODENUMBER, episode.number());
+        intent.putExtra(EpisodeDetailsActivity.EXTRA_SEASONNUMBER, episode.season());
+        intent.putExtra(EpisodeDetailsActivity.EXTRA_SERIESNAME, mShowName);
         startActivity(intent);
-
     }
 
     @Override
@@ -95,4 +109,12 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
 
 
     }
+
+    public void GetExtrasFromBundle()
+    {
+        Intent intent = getIntent();
+        mSeasonNumber = (int)intent.getExtras().getLong(EXTRA_SEASONNUMBER);
+        mShowName = intent.getExtras().getString(EXTRA_SHOWNAME);
+    }
+
 }

@@ -20,10 +20,10 @@ public class ShowContentAdapter  extends FragmentPagerAdapter {
 
     private Show mShow;
 
-    public ShowContentAdapter(FragmentManager fragmentManager)
+    public ShowContentAdapter(FragmentManager fragmentManager, Show show)
     {
         super(fragmentManager);
-        //mShow = show;
+        mShow = show;
     }
 
     @Override
@@ -35,12 +35,12 @@ public class ShowContentAdapter  extends FragmentPagerAdapter {
         if (position == POSITION_OVERVIEW)
         {
             //arguments.putSerializable();
-            fragment = new ShowDetailsInfoFragment();
+            fragment = new ShowDetailsInfoFragment(mShow);
         }
 
         if (position == POSITION_SEASONS) {
             //arguments.putSerializable();
-            fragment = new ShowDetailSeasonsFragment();
+            fragment = new ShowDetailSeasonsFragment(mShow);
         }
         fragment.setArguments(arguments);
 

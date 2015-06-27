@@ -23,13 +23,16 @@ public class EpisodeDetailsActivity extends BaseNavigationToolbarActivity implem
     private static EpisodeDetailsPresenter episodeDetailsPresenter;
 
     public static String EXTRA_EPISODENUMBER = "EPISODE_NUMBER";
+    public static String EXTRA_SEASONNUMBER = "SEASON_NUMBER";
+    public static String EXTRA_SERIESNAME = "SERIES_NAME";
 
     private static int mEpisodeNumber = 1;
+    private static int mSeasonNumber = 1;
+    private static String mSeriesName = "house";
 
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //showLoading();
          super.onCreate(savedInstanceState);
          setContentView(R.layout.episode_details_activity);
          configureToolbar();
@@ -39,9 +42,9 @@ public class EpisodeDetailsActivity extends BaseNavigationToolbarActivity implem
         //region MVP
         episodeDetailsPresenter = new EpisodeDetailsPresenter(this, getString(R.string.api_url_base));
 
-         GetExtrasFromBundle();
+        GetExtrasFromBundle();
 
-        episodeDetailsPresenter.getEpisodeDetails("house", 2, mEpisodeNumber);
+        episodeDetailsPresenter.getEpisodeDetails(mSeriesName, mSeasonNumber, mEpisodeNumber);
 
 
         //endregion
@@ -71,7 +74,10 @@ public class EpisodeDetailsActivity extends BaseNavigationToolbarActivity implem
     {
         Intent intent = getIntent();
         mEpisodeNumber = (int)intent.getExtras().getLong(EXTRA_EPISODENUMBER);
+        mSeasonNumber = (int)intent.getExtras().getLong(EXTRA_SEASONNUMBER);
+        mSeriesName = intent.getExtras().getString(EXTRA_SERIESNAME);
     }
+
 
     @Override
     public void displayEpisode(Episode episode) {

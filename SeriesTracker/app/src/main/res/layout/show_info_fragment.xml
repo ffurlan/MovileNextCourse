@@ -136,6 +136,7 @@
                 android:paddingBottom="10dp"
                 android:text="Broadcasting:"/>
 
+
             <TextView
                 android:id="@+id/text_show_details_Status"
                 android:layout_height="wrap_content"
