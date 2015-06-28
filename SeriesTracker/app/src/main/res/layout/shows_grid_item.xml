@@ -4,9 +4,8 @@
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/showImage"
-        android:src="@drawable/episode_details_clock"
+        android:src="@drawable/show_item_placeholder"
         android:layout_width="114dp"
         android:layout_height="170dp"
-        android:scaleType="centerCrop"
-        android:layout_marginLeft="5dp"/>
+        android:scaleType="centerCrop"/>
 </LinearLayout>

@@ -102,4 +102,15 @@
     </style>
 
 
+    <!--View Pager -->
+    <style name="AppTheme.SeasonDetails.ViewPager" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/default_textColor_first</item>
+        <item name="android:textSize">@dimen/default_textSize_medium</item>
+        <item name="android:background">@color/default_background_fourth</item>
+    </style>
+
+
+
 </resources>
