@@ -51,10 +51,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
         holder.SeasonNumber().setText(MessageFormat.format("Season {0}", season.number().toString()));
         holder.SeasonEpisodesCount().setText(MessageFormat.format("{0} episodes", season.episodeCount().toString()));
-        String url = season.images().poster().get(Images.ImageSize.THUMB);
+        String url = season.images().poster().get(Images.ImageSize.FULL);
         Glide.with(mContext)
                 .load(url)
-                .placeholder(R.drawable.overlay)
                 .centerCrop()
                 .into(holder.SeasonImage());
 

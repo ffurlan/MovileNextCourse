@@ -20,6 +20,7 @@ import com.movile.next.seriestracker.activities.listener.OnEpisodeClick;
 import com.movile.next.seriestracker.activities.model.Episode;
 import com.movile.next.seriestracker.activities.model.Images;
 import com.movile.next.seriestracker.activities.model.Season;
+import com.movile.next.seriestracker.activities.model.Show;
 import com.movile.next.seriestracker.activities.presenter.SeasonDetailsHeaderPresenter;
 import com.movile.next.seriestracker.activities.presenter.SeasonDetailsPresenter;
 import com.movile.next.seriestracker.activities.view.SeasonDetailsHeaderView;
@@ -39,6 +40,9 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
     private static int mSeasonNumber = 1;
     public static String EXTRA_SHOWNAME = "SHOW_NAME";
     private static String mShowName = "house";
+    public static String EXTRA_SHOW = "SHOW";
+    private static Show mShow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,18 +100,19 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
         txtSeasonRatting.setText(rating);
 
         ImageView image_season_small = (ImageView) findViewById(R.id.image_season);
-        String url = season.images().thumb().get(Images.ImageSize.FULL);
+        String urlImgSmall = season.images().poster().get(Images.ImageSize.FULL);
         Glide.with(getApplicationContext())
-                .load(url)
+                .load(urlImgSmall)
                 .centerCrop()
                 .into(image_season_small);
 
         ImageView image_season_large = (ImageView) findViewById(R.id.image_seasonTitle);
-        url = season.images().poster().get(Images.ImageSize.THUMB);
+        String urlImgTitle =  mShow.images().thumb().get(Images.ImageSize.FULL);
         Glide.with(getApplicationContext())
-                .load(url)
+                .load(urlImgTitle)
                 .centerCrop()
                 .into(image_season_large);
+
         hideLoading();
 
 
@@ -118,6 +123,7 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
         Intent intent = getIntent();
         mSeasonNumber = (int)intent.getExtras().getLong(EXTRA_SEASONNUMBER);
         mShowName = intent.getExtras().getString(EXTRA_SHOWNAME);
+        mShow = (Show)intent.getExtras().getSerializable(EXTRA_SHOW);
     }
 
 }

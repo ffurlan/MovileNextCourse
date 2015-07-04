@@ -15,6 +15,9 @@ import com.movile.next.seriestracker.R;
 import com.movile.next.seriestracker.activities.adapters.GenresAdapter;
 import com.movile.next.seriestracker.activities.adapters.RecycleAdapter;
 import com.movile.next.seriestracker.activities.model.Show;
+import com.movile.next.seriestracker.activities.util.FormatUtil;
+
+import java.util.Date;
 
 /**
  * Created by movile on 21/06/15.
@@ -38,7 +41,7 @@ public class ShowDetailsInfoFragment extends Fragment {
         txtStatus.setText(mShow.status());
 
         TextView txtStartedIn = (TextView) view.findViewById(R.id.text_show_details_Started);
-        txtStartedIn.setText(mShow.firstAired());
+        txtStartedIn.setText(mShow.year().toString());
 
         TextView txtCountry = (TextView) view.findViewById(R.id.text_show_details_Country);
         txtCountry.setText(mShow.country());

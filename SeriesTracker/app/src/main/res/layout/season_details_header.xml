@@ -19,24 +19,14 @@
         android:scaleType="centerCrop"
         android:src="@drawable/highlight_placeholder" />
 
-      <TextView
-      android:id="@+id/text_seasonYear"
-      android:text="Episodes"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="16dp"
-      android:layout_marginTop="151dp"
-      android:textColor="@color/default_textColor_first" />
-
-
      <ImageView
         android:id="@+id/image_season"
         android:layout_width="88dp"
         android:layout_height="128dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="184dp"
         android:src="@drawable/season_item_placeholder"
-         android:layout_below="@+id/text_seasonYear"/>
+        />
 
     <TextView
         android:id="@+id/text_seasonEpisode"
@@ -44,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="17dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:textColor="@color/default_textColor_third"
         android:layout_below="@+id/image_season"/>
 

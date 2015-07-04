@@ -1,55 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.movile.next.seriestracker" >
-
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-
+<manifest
+    package="com.movile.next.seriestracker"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-
-        <activity
-            android:name=".activities.activity.EpisodeDetailsActivity"
-            android:label="@string/app_name" >
-        </activity>
-
-        <activity
-            android:name=".activities.activity.SeasonDetailsActivity"
-            android:label="@string/app_name" >
-
-        </activity>
-
-        <activity
-            android:name=".activities.activity.ShowDetailsActivity"
-            android:label="@string/app_name" >
-
-        </activity>
-
-        <activity
-            android:name=".activities.activity.ShowActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-        <service
-            android:name=".activities.services.UpdateService"
-            android:exported="false" />
-
-        <receiver
-            android:name=".activities.receiver.ShowUpdateReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.movile.next.seriestracker.action.SHOW_UPDATE" />
-            </intent-filter>
-        </receiver>
-
-    </application>
-
+        tools:replace="android:name"
+        android:name=".activities.application.SeriesTrackerDebugApplication" />
 </manifest>

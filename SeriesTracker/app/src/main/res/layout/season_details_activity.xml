@@ -10,7 +10,8 @@
         android:divider="@color/list_view_divider_color"
         android:dividerHeight="@dimen/list_view_divider_height"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/default_background_second"/>
 
 
 

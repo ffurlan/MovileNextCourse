@@ -99,10 +99,9 @@ public class EpisodeDetailsActivity extends BaseNavigationToolbarActivity implem
         //task.execute(episode.images().screenshot().get(Images.ImageSize.THUMB));
 
         ImageView img = (ImageView) findViewById(R.id.episode_details_screenshot);
-        String url = episode.images().screenshot().get(Images.ImageSize.THUMB);
+        String url = episode.images().screenshot().get(Images.ImageSize.FULL);
         Glide.with(getApplicationContext())
                 .load(url)
-                .placeholder(R.drawable.overlay)
                 .centerCrop()
                 .into(img);
         hideLoading();

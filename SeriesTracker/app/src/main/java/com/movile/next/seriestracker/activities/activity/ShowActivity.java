@@ -1,10 +1,12 @@
 package com.movile.next.seriestracker.activities.activity;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.movile.next.seriestracker.R;
@@ -22,7 +24,7 @@ import com.movile.next.seriestracker.activities.view.ShowsView;
 /**
  * Created by movile on 27/06/15.
  */
-public class ShowActivity  extends BaseNavigationToolbarActivity implements ShowsView, OnShowClick {
+public class ShowActivity  extends Activity implements ShowsView, OnShowClick {
 
     private static ShowGridAdapter mAdapter;
     private static ShowPresenter showPresenter;
@@ -33,16 +35,12 @@ public class ShowActivity  extends BaseNavigationToolbarActivity implements Show
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shows_activity);
 
-        configureToolbar();
-
         showPresenter = new ShowPresenter(this, getString(R.string.api_url_base));
         showPresenter.getShows();
 
         GridView gridview = (GridView) findViewById(R.id.gridShows);
         mAdapter = new ShowGridAdapter(this, this);
         gridview.setAdapter(mAdapter);
-
-        getSupportActionBar().setTitle("Series Tracker");
 
         PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, new Intent(getApplicationContext(), UpdateService.class), 0);
         AlarmManager manager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);

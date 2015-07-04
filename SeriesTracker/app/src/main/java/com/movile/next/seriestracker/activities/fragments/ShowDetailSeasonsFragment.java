@@ -75,6 +75,7 @@ public class ShowDetailSeasonsFragment extends Fragment implements SeasonDetails
         Intent intent = new Intent(this.getActivity(), SeasonDetailsActivity.class);
         intent.putExtra(SeasonDetailsActivity.EXTRA_SEASONNUMBER, season.number());
         intent.putExtra(SeasonDetailsActivity.EXTRA_SHOWNAME, mShow.ids().slug());
+        intent.putExtra(SeasonDetailsActivity.EXTRA_SHOW, mShow);
         startActivity(intent);
     }
 }
