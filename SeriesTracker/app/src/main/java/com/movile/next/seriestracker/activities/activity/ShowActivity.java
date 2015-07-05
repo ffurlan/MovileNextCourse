@@ -8,8 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
+import android.widget.ListView;
 
 import com.movile.next.seriestracker.R;
+import com.movile.next.seriestracker.activities.adapters.EpisodeListAdapter;
+import com.movile.next.seriestracker.activities.adapters.FavoritesAdapter;
+import com.movile.next.seriestracker.activities.base.BaseNavigationDrawerActivity;
 import com.movile.next.seriestracker.activities.base.BaseNavigationToolbarActivity;
 
 import java.util.List;
@@ -24,7 +28,7 @@ import com.movile.next.seriestracker.activities.view.ShowsView;
 /**
  * Created by movile on 27/06/15.
  */
-public class ShowActivity  extends Activity implements ShowsView, OnShowClick {
+public class ShowActivity  extends BaseNavigationDrawerActivity implements ShowsView, OnShowClick {
 
     private static ShowGridAdapter mAdapter;
     private static ShowPresenter showPresenter;
@@ -34,6 +38,8 @@ public class ShowActivity  extends Activity implements ShowsView, OnShowClick {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shows_activity);
+        configureNavigation();
+
 
         showPresenter = new ShowPresenter(this, getString(R.string.api_url_base));
         showPresenter.getShows();

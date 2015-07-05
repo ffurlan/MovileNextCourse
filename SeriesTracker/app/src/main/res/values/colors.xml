@@ -36,4 +36,7 @@
     <!-- Base Loading -->
     <color name="base_loading_container_background">#99333333</color>
 
+    <!-- Base Navigation Drawer -->
+    <color name="base_navigation_drawer_content_background">@color/default_background_second</color>
+
 </resources>

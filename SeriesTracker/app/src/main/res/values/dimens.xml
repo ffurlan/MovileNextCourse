@@ -20,4 +20,7 @@
     <!-- Base Loading -->
     <dimen name="base_loading_progress_size">48dp</dimen>
 
+    <!-- Base Navigation Drawer -->
+    <dimen name="base_navigation_drawer_content_width">300dp</dimen>
+
 </resources>

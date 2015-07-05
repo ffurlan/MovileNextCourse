@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +32,7 @@ import java.text.DecimalFormat;
 /**
  * Created by movile on 21/06/15.
  */
-public class ShowDetailsActivity extends BaseNavigationToolbarActivity implements ShowDetailsView, OnFavoriteListener {
+    public class ShowDetailsActivity extends BaseNavigationToolbarActivity implements ShowDetailsView, OnFavoriteListener {
 
     private static ShowDetailsPresenter showDetailsPresenter;
     public static String EXTRA_SHOWNAME = "SHOW_NAME";
@@ -95,13 +99,50 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
     public void onFavoriteLoaded(Favorite favorite) {
 
         if (favorite != null) {
-            favoriteView.setImageResource(R.drawable.show_details_favorite_on);
+            animate(favoriteView, R.drawable.show_details_favorite_on);
+            //favoriteView.setImageResource(R.drawable.show_details_favorite_on);
             favoriteView.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_second));
         }
         else {
-            favoriteView.setImageResource(R.drawable.show_details_favorite_off);
+            animate(favoriteView, R.drawable.show_details_favorite_off);
+            //favoriteView.setImageResource(R.drawable.show_details_favorite_off);
             favoriteView.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_third));
         }
+    }
+
+    private void animate(final ImageView currentImage, final int newResource) {
+
+        int fadeInDuration = 3000;
+        int timeBetween = 3000;
+        int fadeOutDuration = 3000;
+
+        currentImage.setVisibility(View.INVISIBLE);
+        currentImage.setImageResource(newResource);
+
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator());
+        fadeIn.setDuration(fadeInDuration);
+
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator());
+        fadeOut.setStartOffset(fadeInDuration + timeBetween);
+        fadeOut.setDuration(fadeOutDuration);
+
+        AnimationSet animation = new AnimationSet(false);
+        animation.addAnimation(fadeIn);
+        animation.addAnimation(fadeOut);
+        animation.setRepeatCount(1);
+        currentImage.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            public void onAnimationEnd(Animation animation) {
+            }
+            public void onAnimationRepeat(Animation animation){
+            }
+
+            public void onAnimationStart(Animation animation) {
+            }
+        });
     }
 
     private void ConfigureFavoriteButton(Show show)
@@ -120,7 +161,5 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
                 ).forceLoad();
             }
         });
-
-
     }
 }
